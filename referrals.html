@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>صفحة الإحالات</title>
+</head>
+<body>
+  <h2>رابط الإحالة الخاص بك:</h2>
+  <p id="referralLink">جاري التحميل...</p>
+
+  <script>
+    const code = localStorage.getItem("referralCode");
+    if (code) {
+      const link = `${location.origin}/index.html?ref=${code}`;
+      document.getElementById("referralLink").innerText = link;
+    } else {
+      document.getElementById("referralLink").innerText = "لم يتم العثور على كود الإحالة.";
+    }
+  </script>
+</body>
+</html>
