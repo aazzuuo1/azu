@@ -91,13 +91,6 @@
       registerCard.classList.toggle('hidden', isLogin);
     }
 
-    function saveUser(email) {
-      localStorage.setItem('userEmail', email);
-    }
-    function userExists() {
-      return localStorage.getItem('userEmail');
-    }
-
     // تسجيل المستخدم
     registerForm.addEventListener('submit', e => {
       e.preventDefault();
@@ -122,25 +115,26 @@
           }
         });
     });
-// تسجيل الدخول
-loginForm.addEventListener('submit', e => {
-  e.preventDefault();
-  loginWarning.classList.add('hidden');
 
-  const email = document.getElementById('loginEmail').value.trim();
-  const pass = document.getElementById('loginPass').value;
+    // تسجيل الدخول
+    loginForm.addEventListener('submit', e => {
+      e.preventDefault();
+      loginWarning.classList.add('hidden');
 
-  fetch('https://script.google.com/macros/s/AKfycbyKaTzoMH8UC0sfuFX_svuwOeP94bZLU2-1zAgxJVuSgZy0PrKIj4gzuyWLeUenClr5/exec?action=login&email=' + email + '&password=' + pass)
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        saveUser(email); // نحفظ الإيميل إذا أردنا لاحقًا استخدامه
-        window.location.href = 'home.html'; // تحويل المستخدم
-      } else {
-        alert(data.message);
-      }
+      const email = document.getElementById('loginEmail').value.trim();
+      const pass = document.getElementById('loginPass').value;
+
+      // إرسال البيانات إلى جوجل شيت للتحقق من البيانات
+      fetch('https://script.google.com/macros/s/AKfycbyKaTzoMH8UC0sfuFX_svuwOeP94bZLU2-1zAgxJVuSgZy0PrKIj4gzuyWLeUenClr5/exec?action=login&email=' + email + '&password=' + pass)
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            window.location.href = 'home.html'; // نقل المستخدم إلى صفحة الهوم
+          } else {
+            alert(data.message);
+          }
+        });
     });
-});
   </script>
 </body>
 </html>
