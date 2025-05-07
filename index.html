@@ -142,7 +142,7 @@
         .then(data => {
           if (data.success) {
             saveUser(email);
-         window.location.href = "https://aazzuuo1.github.io/azu/home.html";
+         window.location.href = window.location.origin + "home.html";
           } else {
             alert(data.message);
           }
