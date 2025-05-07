@@ -129,7 +129,7 @@
         .then(response => response.json())
         .then(data => {
           if (data.success) {
-            window.location.href = 'home.html'; // نقل المستخدم إلى صفحة الهوم
+         location.href = 'home.html';
           } else {
             alert(data.message);
           }
